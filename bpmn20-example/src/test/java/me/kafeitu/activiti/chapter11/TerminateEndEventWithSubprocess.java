@@ -53,8 +53,7 @@ public class TerminateEndEventWithSubprocess extends PluggableActivitiTestCase {
 
     private void checkFinished(ProcessInstance processInstance) {
         // 验证流程已结束
-        HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery()
-                .processInstanceId(processInstance.getProcessInstanceId()).singleResult();
+        HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery().processInstanceId(processInstance.getProcessInstanceId()).singleResult();
         assertNotNull(historicProcessInstance.getEndTime());
 
         // 查询历史任务

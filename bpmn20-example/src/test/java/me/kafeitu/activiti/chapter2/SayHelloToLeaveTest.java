@@ -15,21 +15,13 @@ public class SayHelloToLeaveTest {
 
     @Test
     public void testStartProcess() throws Exception {
-        ProcessEngine processEngine = ProcessEngineConfiguration
-                .createStandaloneInMemProcessEngineConfiguration()
-                .buildProcessEngine();
+        ProcessEngine processEngine = ProcessEngineConfiguration.createStandaloneInMemProcessEngineConfiguration().buildProcessEngine();
 
         RepositoryService repositoryService = processEngine.getRepositoryService();
         String bpmnFileName = "me/kafeitu/activiti/helloworld/SayHelloToLeave.bpmn";
-        repositoryService
-                .createDeployment()
-                .addInputStream(
-                        "SayHelloToLeave.bpmn",
-                        this.getClass().getClassLoader()
-                                .getResourceAsStream(bpmnFileName)).deploy();
+        repositoryService.createDeployment().addInputStream("SayHelloToLeave.bpmn", this.getClass().getClassLoader().getResourceAsStream(bpmnFileName)).deploy();
 
-        ProcessDefinition processDefinition = repositoryService
-                .createProcessDefinitionQuery().singleResult();
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().singleResult();
         assertEquals("SayHelloToLeave", processDefinition.getKey());
 
         RuntimeService runtimeService = processEngine.getRuntimeService();
@@ -38,15 +30,12 @@ public class SayHelloToLeaveTest {
         variables.put("applyUser", "employee1");
         variables.put("days", 3);
 
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(
-                "SayHelloToLeave", variables);
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("SayHelloToLeave", variables);
         assertNotNull(processInstance);
-        System.out.println("pid=" + processInstance.getId() + ", pdid="
-                + processInstance.getProcessDefinitionId());
+        System.out.println("pid=" + processInstance.getId() + ", pdid=" + processInstance.getProcessDefinitionId());
 
         TaskService taskService = processEngine.getTaskService();
-        Task taskOfDeptLeader = taskService.createTaskQuery()
-                .taskCandidateGroup("deptLeader").singleResult();
+        Task taskOfDeptLeader = taskService.createTaskQuery().taskCandidateGroup("deptLeader").singleResult();
         assertNotNull(taskOfDeptLeader);
         assertEquals("领导审批", taskOfDeptLeader.getName());
 
@@ -55,13 +44,11 @@ public class SayHelloToLeaveTest {
         variables.put("approved", true);
         taskService.complete(taskOfDeptLeader.getId(), variables);
 
-        taskOfDeptLeader = taskService.createTaskQuery()
-                .taskCandidateGroup("deptLeader").singleResult();
+        taskOfDeptLeader = taskService.createTaskQuery().taskCandidateGroup("deptLeader").singleResult();
         assertNull(taskOfDeptLeader);
 
         HistoryService historyService = processEngine.getHistoryService();
-        long count = historyService.createHistoricProcessInstanceQuery().finished()
-                .count();
+        long count = historyService.createHistoricProcessInstanceQuery().finished().count();
         assertEquals(1, count);
     }
 }

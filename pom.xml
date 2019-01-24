@@ -69,8 +69,7 @@
 		<module>chapter13-query</module>
 		<module>chapter14-management</module>
 		<module>chapter17-jpa</module>
-		<!-- 第18章依赖太多，请去掉注释编译 -->
-        <!--module>chapter18-esb</module-->
+        <!--<module>chapter18-esb</module>-->
 		<module>chapter19-identity</module>
 		<module>chapter20-rest</module>
 		<module>chapter21-invade</module>

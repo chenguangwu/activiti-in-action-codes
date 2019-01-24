@@ -12,9 +12,21 @@
 
     <name>Activiti实战 第7章《与容器集成》- Spring Boot</name>
     <url>http://maven.apache.org</url>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <properties>
-        <spring.boot.version>1.1.4.RELEASE</spring.boot.version>
+        <spring.boot.version>1.4.5.RELEASE</spring.boot.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -24,10 +36,15 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.activiti</groupId>-->
+            <!--<artifactId>activiti-spring-boot</artifactId>-->
+            <!--<version>5.16.3</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.activiti</groupId>
-            <artifactId>activiti-spring-boot</artifactId>
-            <version>5.16.3</version>
+            <artifactId>activiti-spring-boot-starter-basic</artifactId>
+            <version>6.0.0</version>
         </dependency>
 
         <dependency>
