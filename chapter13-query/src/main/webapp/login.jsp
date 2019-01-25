@@ -26,7 +26,7 @@
 				</tr>
 				<tr>
 					<td>密码：</td>
-					<td><input id="password" name="password" type="password" style="width: 100px" /></td>
+					<td><input id="password" name="password" type="password" style="width: 100px" value="000000" /></td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
